@@ -4,18 +4,21 @@ import { compile } from '@mdx-js/mdx';
 import { transformAsync } from '@babel/core'
 
 async function transform(options, code) {
-    const jsx = await compile(code, {jsx: true, outputFormat: 'function-body', ...options})
-    const wrap = `const { default: render, ...rest } = (() => {${String(jsx)}})()
+    const jsx = await compile(code, {jsx: true, ...options})
+    const js = (await transformAsync(jsx, {plugins: ['@vue/babel-plugin-jsx']})).code
+        .replace("\nexport default MDXContent;", "")
+        .replace("export const ", "const exports = {};\nexports.")
+        .replaceAll("export const ", "exports.");
 
-export default {
-    ...rest,
-    inject: ["$mdxComponents"],
-    render() {
-        return render({components: this.$mdxComponents, ...rest})
-    }
-}`;
-    const js = await transformAsync(wrap, {plugins: ['@vue/babel-plugin-jsx']});
-    return js?.code;
+    return `${js}
+
+    export default {
+        ...exports,
+        inject: ["$mdxComponents"],
+        render() {
+            return MDXContent({components: this.$mdxComponents, ...exports})
+        }
+    }`;
 }
 
 const mdxLoader = createUnplugin((options) => ({
