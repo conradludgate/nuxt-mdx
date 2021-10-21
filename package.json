@@ -1,0 +1,18 @@
+{
+  "name": "nuxt-mdx",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "license": "MIT",
+  "scripts": {
+    "build": "esbuild --bundle src/index.ts --outdir=dist --platform=node"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.15.8",
+    "@mdx-js/mdx": "^2.0.0-rc.1",
+    "@nuxt/kit": "npm:@nuxt/kit-edge@3.0.0-27245975.d1214c9",
+    "@types/babel__core": "^7.1.16",
+    "babel": "^6.23.0",
+    "esbuild": "^0.13.8",
+    "unplugin": "^0.2.16"
+  }
+}
