@@ -7,8 +7,11 @@
   "dependencies": {
     "@babel/core": "^7.15.8",
     "@mdx-js/mdx": "^2.0.0-rc.1",
-    "@nuxt/kit": "^npm:@nuxt/kit-edge@3.0.0-27247270.f04d6e3",
+    "@nuxt/kit": "npm:@nuxt/kit-edge@3.0.0-27247270.f04d6e3",
     "babel": "^6.23.0",
     "unplugin": "^0.2.16"
+  },
+  "peerDependencies": {
+    "@mdx-js/vue": "^2.0.0-rc.1"
   }
 }
