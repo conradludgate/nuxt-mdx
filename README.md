@@ -34,6 +34,24 @@ This is markdown!
 
 Running `npx nuxi dev` and opening that page will display the markdown contents.
 
+## Example
+
+https://github.com/conradludgate/blog-nuxt/tree/5a35204c6d030e8322f0ffe505c8df3777533689
+
+## Plugins
+
+For plugins, see https://github.com/mdx-js/mdx/blob/main/packages/mdx/readme.md#optionsremarkplugins
+
+```ts
+buildModules: [
+    ["nuxt-mdx", {
+        remarkPlugins: [...],
+        rehypePlugins: [...],
+        recmaPlugins: [...],
+    }]
+]
+```
+
 ## Advanced usage
 
 You can customise the rendering of the markdown.
@@ -86,12 +104,13 @@ Now, create a component file in your `components` folder, eg. `components/BlogPo
 <script lang="ts">
 export default defineComponent({
   props: {
-    title: String,
+    title: String, // Title is exported from the mdx file and passed as a prop to the Wrapper
   }
 });
 </script>
 
 <template>
+  <!-- Renders the page title followed by the page contents -->
   <h1>{{ title }}</h1>
   <slot />
 </template>
