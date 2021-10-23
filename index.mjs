@@ -12,6 +12,7 @@ async function transform(options, code) {
 
     return `${js}
 
+    export const meta = exports;
     export default {
         ...exports,
         inject: ["$mdxComponents"],
