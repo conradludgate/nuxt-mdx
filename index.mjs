@@ -7,10 +7,11 @@ async function transform(options, code) {
     const jsx = await compile(code, {jsx: true, ...options})
     const js = (await transformAsync(jsx, {plugins: ['@vue/babel-plugin-jsx']})).code
         .replace("\nexport default MDXContent;", "")
-        .replace("export const ", "const exports = {};\nexports.")
         .replaceAll("export const ", "exports.");
 
-    return `${js}
+    return `const exports = {};
+
+    ${js}
 
     export const meta = exports;
     export default {
